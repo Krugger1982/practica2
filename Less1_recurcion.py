@@ -59,21 +59,43 @@ def even_numbered_index(List, i=0):
         return
     else:
         even_numbered_index(List, i + 2)
-    
-def maximum_1(List):
-    """ Находит максимальное число в массиве (рекурсивно) """
-    if len(List) == 0:
+        
+##def maximum_1(List):
+##    """ Находит максимальное число в массиве (рекурсивно) """
+##    if len(List) == 0:
+##        return None
+##    if len(List) == 1:
+##        return List[0]
+##    return max(List[0], maximum_1(List[1:]))
+##
+##def maximum_2(List):
+##    """ Находит второе максимальное число в массиве """
+##    List1 = List.copy()              # создадим копию списка чтоб не портить исходный, далее работаем с List1
+##    Max = maximum_1(List1)           # Находим максимальное число
+##    if Max is None:
+##        return Max                   # Для пустого массива вернется  None
+##    while maximum_1(List1) == Max:
+##        List1.remove(Max)            # И удаляем все экземпляры этого числа из списка
+##    return maximum_1(List1)          # После удаления находим максимальное число из оставшихся
+
+def max_1_2(current, rezlist):
+    ''' Функция для сравнения, на вход - текущее значение и список из 2х элементов, [MAX1, MAX2]'''
+    if current > rezlist[0]:
+        rezlist[0] = current                        # Увеличиваем MAX1
+    elif current < rezlist[0] and current > rezlist[1]:
+        rezlist[1] = current                        # Или увеличиваем MAX2
+                                                    # В противном случае (если  current равен кому-либо из них или меньше обоих, ничего не делаем
+    return rezlist                                  # На выходе - список ииз двух максимальных элементов (самый большой и 2-е место)
+                                                     
+def maximums_recursive(List):
+    if len(List) == 0:                  # Для пустого списка ничего не получится
         return None
-    if len(List) == 1:
-        return List[0]
-    return max(List[0], maximum_1(List[1:]))
+    if len(List) == 1:                  # Граничный случай
+        return [List[0], List[0]]
+    return max_1_2(List[0], maximums_recursive(List[1:]))
 
 def maximum_2(List):
-    """ Находит второе максимальное число в массиве """
-    List1 = List.copy()              # создадим копию списка чтоб не портить исходный, далее работаем с List1
-    Max = maximum_1(List1)           # Находим максимальное число
-    if Max is None:
-        return Max                   # Для пустого массива вернется  None
-    while maximum_1(List1) == Max:
-        List1.remove(Max)            # удаляем все экземпляры этого числа из списка
-    return maximum_1(List1)          # После удаления находим максимальное число из оставшихся
+    result = maximums_recursive(List)
+    if result is None or result[0] == result[1]:
+        return None
+    return result[1]
