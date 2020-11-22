@@ -75,5 +75,5 @@ def maximum_2(List):
     if Max is None:
         return Max                   # Для пустого массива вернется  None
     while maximum_1(List1) == Max:
-        List1.remove(Max)            # И удаляем все экземпляры этого числа из списка
+        List1.remove(Max)            # удаляем все экземпляры этого числа из списка
     return maximum_1(List1)          # После удаления находим максимальное число из оставшихся
