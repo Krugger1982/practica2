@@ -45,7 +45,7 @@ def even_numbered(List):
     if len(List) > 0 and List[0] % 2 == 0:
         print(List[0], end=' ')
         even_numbered(List[1:])
-    elif len(List) > 0:
+    elif len(List) > 1:
         even_numbered(List[1:])
 
 def even_numbered_index(List):
