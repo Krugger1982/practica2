@@ -40,17 +40,23 @@ def palindr(String):
         return True
     return String[0] == String[-1] and palindr(String[1:-1])
 
+#def even_numbered(List):
+#    """ Печатает четные числа из списка List"""
+#    try:
+#        current = List[0]
+#    except IndexError:
+#        return
+#    else:
+#        if current % 2 == 0:
+#            print(current, end=' ')
+#        even_numbered(List[1:])
+
 def even_numbered(List):
     """ Печатает четные числа из списка List"""
-    try:
-        current = List[0]
-    except IndexError:
-        return
-    else:
-        if current % 2 == 0:
-            print(current, end=' ')
+    if len(List) > 0:
+        print(List[0], end=' ')
         even_numbered(List[1:])
-
+        
 def even_numbered_index(List, i=0):
     """ Печатает числа из списка List, находящиеся на четном индексе  """
     try:
@@ -60,23 +66,23 @@ def even_numbered_index(List, i=0):
     else:
         even_numbered_index(List, i + 2)
         
-##def maximum_1(List):
-##    """ Находит максимальное число в массиве (рекурсивно) """
-##    if len(List) == 0:
-##        return None
-##    if len(List) == 1:
-##        return List[0]
-##    return max(List[0], maximum_1(List[1:]))
-##
-##def maximum_2(List):
-##    """ Находит второе максимальное число в массиве """
-##    List1 = List.copy()              # создадим копию списка чтоб не портить исходный, далее работаем с List1
-##    Max = maximum_1(List1)           # Находим максимальное число
-##    if Max is None:
-##        return Max                   # Для пустого массива вернется  None
-##    while maximum_1(List1) == Max:
-##        List1.remove(Max)            # И удаляем все экземпляры этого числа из списка
-##    return maximum_1(List1)          # После удаления находим максимальное число из оставшихся
+#def maximum_1(List):
+#    """ Находит максимальное число в массиве (рекурсивно) """
+#    if len(List) == 0:
+#        return None
+#    if len(List) == 1:
+#        return List[0]
+#    return max(List[0], maximum_1(List[1:]))
+#
+#def maximum_2(List):
+#    """ Находит второе максимальное число в массиве """
+#    List1 = List.copy()              # создадим копию списка чтоб не портить исходный, далее работаем с List1
+#    Max = maximum_1(List1)           # Находим максимальное число
+#    if Max is None:
+#        return Max                   # Для пустого массива вернется  None
+#    while maximum_1(List1) == Max:
+#        List1.remove(Max)            # И удаляем все экземпляры этого числа из списка
+#    return maximum_1(List1)          # После удаления находим максимальное число из оставшихся
 
 def max_1_2(current, rezlist):
     ''' Функция для сравнения, на вход - текущее значение и список из 2х элементов, [MAX1, MAX2]'''
