@@ -16,7 +16,7 @@ class Tests_for_recoursive_functions(unittest.TestCase):
         self.assertEqual(4, length([256, 'string', ('tuple', 16), ['list', 12, 13]]))           # проверка для непустого списка
 
     def test_4_palindrom(self):
-        self.assertTrue(palindrom('арозазора'))                                # проверка для палиндрома
+        self.assertTrue(palindrom('арозазора'))                                 # проверка для палиндрома
         self.assertFalse(palindrom('а роза упала'))                             # проверка для непалиндрома
         self.assertTrue(palindrom('а роза упала на лапу азора'))                # проверка для палиндрома с пробелами
         self.assertTrue(palindrom('А Роза упала на лапу Азора'))                # проверка для палиндрома с пробелами и разными регистрами
@@ -36,7 +36,7 @@ class Tests_for_recoursive_functions(unittest.TestCase):
         self.assertEqual(maximum_2(TestList), None)                 # Проверка с единственным членом, должен вернуться None
         TestList = [10, 10]
         self.assertEqual(maximum_2(TestList), None)                 # Проверка списка с одинаковыми членами, должен вернуться None
-        TestList = [100, 98, 56, 59, 31, 99, 100, 6, 10]
+        TestList = [100, 99, 56, 59, 31, 98, 100, 6, 10, 100, 100]
         self.assertEqual(maximum_2(TestList), 99)                   # Проверка списка различных значений с повтором максимального
         
         
