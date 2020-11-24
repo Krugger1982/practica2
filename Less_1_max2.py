@@ -4,7 +4,7 @@ def maximums_recursive(MAX1, MAX2, List):
     if List[0] > MAX1:
         MAX2 = MAX1
         MAX1 = List[0]
-    elif MAX1 > List[0] and List[0] > MAX2 or MAX2 == MAX1 and MAX2  > List[0]:
+    elif MAX1 > List[0] and List[0] > MAX2 or MAX2 == MAX1:
         MAX2 = List[0]
     return maximums_recursive(MAX1, MAX2, List[1:])
 
