@@ -54,15 +54,27 @@ def even_numbered_index(List):
         print (List[0], end=' ')
     if len(List) > 2:
         even_numbered_index(List[2:])
-    
+
 def max_1_2(current, rezlist):
     ''' Функция для сравнения, на вход - текущее значение и список из 2х элементов, [MAX1, MAX2]'''
-    if current > rezlist[0]:
-        rezlist[0] = current                        # Увеличиваем MAX1
-    elif current < rezlist[0] and current > rezlist[1]:
-        rezlist[1] = current                        # Или увеличиваем MAX2
+    if rezlist[0] == rezlist[1] and current < rezlist[0]:
+        rezlist[1] = current                        # Сначала избавляемся от равенства двух членов списка rezlist
+    elif current > rezlist[0]:                      # Если очередной больше чем MAX1
+        rezlist[1] = rezlist[0]                     # Увеличиваем MAX1
+        rezlist[0] = current                        # и подтягиваем на его место MAX2
+    elif current < rezlist[0] and current > rezlist[1]: # А если очереной лежит в промежутке MAX2<current<MAX1
+        rezlist[1] = current                        # тогда увеличиваем MAX2
                                                     # В противном случае (если  current равен кому-либо из них или меньше обоих, ничего не делаем
-    return rezlist                                  # На выходе - список ииз двух максимальных элементов (самый большой и 2-е место)
+    return rezlist                                  # На выходе - список из двух максимальных элементов (самый большой и 2-е место)
+
+#def max_1_2(current, rezlist):
+#    ''' Функция для сравнения, на вход - текущее значение и список из 2х элементов, [MAX1, MAX2]'''
+#    if current > rezlist[0]:
+#        rezlist[0] = current                        # Увеличиваем MAX1
+#    elif current < rezlist[0] and current > rezlist[1]:
+#        rezlist[1] = current                        # Или увеличиваем MAX2
+#                                                    # В противном случае (если  current равен кому-либо из них или меньше обоих, ничего не делаем
+#    return rezlist                                  # На выходе - список ииз двух максимальных элементов (самый большой и 2-е место)
                                                      
 def maximums_recursive(List):
     if len(List) == 0:                  # Для пустого списка ничего не получится
