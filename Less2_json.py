@@ -7,16 +7,14 @@ with open ('json_file.json', 'a') as file:
     json.dump(result, file)                  # записываем все записи из ответа в файл
 Answers = {}
 for i in result:
-    if i['userId'] not in Answers:      # Если найден новый пользователь
-        Answers[i['userId']] = {'Tasks':[], 'completed':0}       # Создаем для него новую запись в словаре
+    if i['userId'] not in Answers:                              # Если найден новый пользователь
+        Answers[i['userId']] = {'Tasks':[], 'completed':0}      # Создаем для него новую запись в словаре
         # (Ключ - имя польз., содержание - список оригиналтных задач и счетчик выполненных)
-    if i['id'] not in Answers[i['userId']]['Tasks'] and i['completed']:
-        Answers[i['userId']]['Tasks'].append(i['id'])
-        Answers[i['userId']]['completed'] += 1                      # и учитываем выполненную первую задачу
-            
-    elif i['id'] not in Answers[i['userId']]['Tasks']:               # а если ориг. задача не выполнена, то просто добавляем ее
-        Answers[i['userId']]['Tasks'].append(i['id'])
-
+    if i['id'] not in Answers[i['userId']]['Tasks']:
+        Answers[i['userId']]['Tasks'].append(i['id'])           # если задача оригинальная, добавляем ее в список задач            
+        if  i['completed']:
+            Answers[i['userId']]['completed'] += 1              # и учитываем выполнена ли она
+        
 # ВЫВОД ОТВЕТОВ
 
 print ('Количество пользователей - ', len(Answers))
