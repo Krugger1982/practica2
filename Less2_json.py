@@ -12,8 +12,8 @@ for i in result:
         # (Ключ - имя польз., содержание - список оригиналтных задач и счетчик выполненных)
     if i['id'] not in Answers[i['userId']]['Tasks']:
         Answers[i['userId']]['Tasks'].append(i['id'])           # если задача оригинальная, добавляем ее в список задач            
-        if  i['completed']:
-            Answers[i['userId']]['completed'] += 1              # и учитываем выполнена ли она
+    if  i['completed']:
+        Answers[i['userId']]['completed'] += 1              # и учитываем выполнена ли она
         
 # ВЫВОД ОТВЕТОВ
 
