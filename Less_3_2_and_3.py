@@ -1,3 +1,9 @@
+import xml.etree.ElementTree as ETree
+
+xml1 = ETree.parse('demo.xml')
+root = xml1.getroot()
+
+
 # ЗАДАНИЕ 2
 # Функция, выдающая список значений по тегу
 
@@ -19,7 +25,8 @@ def the_values_in_tag(tag, parced_XML):     # Собчтвенно, требуе
 #ЗАДАНИЕ 3
 # Функция, которая считает количество узлов с заданным атрибутом
 
-def obhod2(atribute, root, counter=0):
+def obhod2(atribute, root):
+    counter=0
     if atribute in root.attrib.keys():      # проверяем есть ли у текущего узла искомый аттрибут 
         counter += 1                        # сдвигаем счетчик
     if len(root) > 0:                       # для вложенных "нижних" уровней
@@ -30,4 +37,3 @@ def obhod2(atribute, root, counter=0):
 def attribute_counter(atribute, parced_XML):
     Root = parced_XML.getroot()
     return obhod2(atribute, Root)
-
