@@ -14,22 +14,19 @@ def Summa(N, List):
     results = {}
     Razmer = len(List) // N
     threads = N * [None]            # процессы будут храниться в списке, чтоб имена были уникальные
-    for i in range(N-1):            # первые N-1 отрезков суммируются одинаково (размер отрезка -  результат целого деления len(List) // N)
+    for i in range(N):              
         Id = 'ID' + str(i + 1)
         start = i * Razmer
         stop = start + Razmer
+        if i == N-1:                    # некрасивая проверка
+            stop = len(List)            # последний отрезок захватит еще и остаток (если len(List) на N делится не нацело)
         threads[i] = Thread(target=little_summa, name='Thread N '+str(i+1), args=(Id, List[start:stop], results))
         threads[i].start()
         time.sleep(0.05)
-    # Последний отрезок кроме обычного количества элементов дополнительно содержит в себе остаточные элементы которые в остатке от деления len(List) % N. 
-    # Этот остаток может быть и нулевым, тогда размер отрезка будет как у всех остальных отрезков.
-    Id = 'ID' + str(N)
-    start = (N-1) * Razmer
-    threads[N-1] = Thread(target=little_summa, name='Thread N '+str(N), args=(Id, List[start:], results))
-    threads[N-1].start()
-
-    time.sleep(0.001 * len(List)/N)          # необходимо выдержать паузу, чтоб все процессы успели отработать
-                                             # размер паузы явно линейно зависит от размера суммируемого участка то есть от len(List)/N
+    Is_counting = True
+    while Is_counting:
+        for current_thread in threads:
+            Is_counting = Is_counting and current_thread.is_alive()     # в бесконечном цикле проверяем, работает ли текущий процесс
     S = 0
     for keys in results:
         S += results[keys]                   # подсчитываем сумму "кусочков"
@@ -41,7 +38,7 @@ class Test_for_parallels(unittest.TestCase):
     def test_1(self):
         
         Testlist = []                       # и тестовый массив
-        M = 600000           # размером M
+        M = 1000000           # размером M
         print('размер массива = ', M)
         N = 50          # задаем количество процессов
         print('процессов - ', N)
